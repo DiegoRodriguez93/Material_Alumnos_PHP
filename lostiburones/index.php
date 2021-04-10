@@ -8,6 +8,9 @@
     * {
       font-family: 'Kiwi Maru', serif;
     }
+    th{
+      font-size: 1.4em;
+    }
   </style>
   <!-- AGREGO UNA FUENTE PERSONALIZADA FIN -->
 </head>
@@ -25,6 +28,8 @@
     </tr>
 
     <?php
+
+    $nombre_de_prueba = 'nombre de prueba';
 
     $clases_de_ninos = [
         'lunes' => '10:00 a 20:00 hs',
@@ -54,6 +59,62 @@
 
     <!-- LOS PRECIOS DEL CLUB LOS VAMOS A VER CON EL BUCLE WHILE QUE ES EL ULTIMO QUE NOS FALTA VER LA CLASE SIGUIENTE-->
 
+    <table style="width:40%; text-align:center;border:1px solid black">
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Precio Mensual</th>
+      <th>Precio Anual</th>
+    </tr>
+
+<?php
+
+    $precios = [['nombre'=>'ninos','rango_de_edad'=>'0 a 12 anos', 'precio_mensual'=>1000, 'precio_anual'=>9000], 
+    ['nombre'=>'adolescentes','rango_de_edad'=>'12 a 18 anos', 'precio_mensual'=>1000, 'precio_anual'=>9000],
+    ['nombre'=>'adultos','rango_de_edad'=>'18 a 60 anos', 'precio_mensual'=>1000, 'precio_anual'=>9000],
+    ['nombre'=>'ancianos','rango_de_edad'=>'desde 60 anos', 'precio_mensual'=>1000, 'precio_anual'=>9000]];
+
+    $largo_de_array = count($precios); // largo del array
+    // mysqli_num_rows()
+
+
+    $indice = 0;
+
+    while( $indice < $largo_de_array ){
+
+      $fila = $precios[$indice]; //row
+      $indice++;
+
+      echo '<tr>';
+
+      // metodos ucfirst() Primera letra en mayus 
+      // strtolower() // pone todo en minusculas 
+      // strtoupper() // todo en mayusculas
+      // ucwords() // Cada Palabra en Mayuscula
+
+      // usos ucfirst('string') ucfirst($variable) ucfirst('string' . 'otro') 
+
+      $nombre = ucfirst($fila['nombre']); // seria igual a $precios[$indice]['nombre']
+      $edad = $fila['rango_de_edad'];
+      $precio_mensual = $fila['precio_mensual'];
+      $precio_anual = $fila['precio_anual'];
+
+      $simbolo_de_pesos = '$';
+
+      echo "<td>$nombre</td>
+      <td>$edad</td>
+      <td>$simbolo_de_pesos $precio_mensual</td>
+      <td>$simbolo_de_pesos $precio_anual</td>
+      ";
+
+      echo '<tr/>';
+
+    }
+
+    ?>
+
+    </table>
+
   <h2>Inscribirme a las clases</h2>
 
   <?php include 'componentes/formulario.html'; ?>
@@ -61,7 +122,7 @@
   <form action="servidor/procesar_incripcion_clases.php" method="POST">
 
     <label>Nombre</label>
-    <input name="nombre" type="text">
+    <input name="nombre" value="diego" type="text"><!-- <?php/* echo $nombre ; */?> -->
 
     <label>Apellido</label>
     <input name="apellido" type="text">
@@ -116,8 +177,8 @@
 $tipos_de_suscripcion = [
   'opcion1' => 'Ninos anual',
   'opcion2' => 'Ninos mensual',
-  'opcion3' => 'Adolencente mensual',
-  'opcion4' => 'Adolecente anual',
+  'opcion3' => 'Adolenscente mensual',
+  'opcion4' => 'Adolescente anual',
   'opcion5' => 'Adulto mensual',
   'opcion6' => 'Adolecente anual',
   'opcion7' => 'Anciano mensual',

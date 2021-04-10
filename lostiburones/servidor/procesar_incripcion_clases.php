@@ -20,6 +20,29 @@ devolver_error_largo($apellido, 2, 'apellido');
 if( $genero != 'hombre' AND $genero != 'mujer' ){
     die('El genero no es correcto');
 }
+
+if($tipo_de_documento == 'ci'){
+
+    // solo_numeros($numero_de_documento);
+
+    if(is_only_numbers($numero_de_documento) 
+    AND ( strlen($numero_de_documento) < 7 
+    OR strlen($numero_de_documento) > 8 )  ){
+        die('La cedula no es correcta');
+    }
+
+}elseif($tipo_de_documento == 'otro'){
+
+    devolver_error_largo($numero_de_documento, 6, 'numero de documento');
+
+}else{
+
+    die('El tipo de documento ingresado no es correcto');
+
+}
+
+// un
+
 // agregar una condicion para cedula y tipo
 
 // preg_match("^\([0-9]{9}\$", "099123456"); devuelve verdadero o falso
